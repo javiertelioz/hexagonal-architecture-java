@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  # Database - Postgresql
+  # See https://www.postgresql.org/docs/ for more information
+  postgres:
+    image: "postgres:13-alpine"
+    environment:
+      TZ: "America/Mexico_City"
+      PGTZ: "America/Mexico_City"
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data/user
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgresql_data:
