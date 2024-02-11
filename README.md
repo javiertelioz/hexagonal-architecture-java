@@ -1,37 +1,43 @@
-# Arquitectura hexaginal - Aplicación de gestión de tareas
+# Arquitectura hexagonal template Java
 
-Esta aplicación es un ejemplo de un sistema de gestión de tareas que sigue la arquitectura hexagonal. La aplicación permite crear, leer, actualizar y eliminar tareas, así como obtener información adicional de una tarea a través de una API externa.
+Este proyecto es una aplicación de gestión de tareas que implementa la arquitectura hexagonal, también conocida como
+Ports and Adapters. Diseñada para demostrar cómo esta arquitectura facilita la separación de responsabilidades, la
+aplicación permite realizar operaciones básicas como crear, leer, actualizar y eliminar tareas, además de interactuar
+con APIs externas para obtener información adicional sobre las tareas.
 
-## Arquitectura hexagonal
+## ¿Qué es la Arquitectura Hexagonal?
 
-La arquitectura hexagonal, también conocida como Ports and Adapters, es un patrón de diseño que busca mantener una separación clara de las responsabilidades en una aplicación, facilitando la adaptabilidad, escalabilidad y mantenibilidad del software. La arquitectura se organiza en tres capas principales:
+La arquitectura hexagonal promueve una clara separación entre la lógica de negocio y los mecanismos de entrada/salida a
+través de tres capas principales:
 
-Dominio: Esta capa contiene las entidades del dominio, que representan los conceptos clave del negocio y sus relaciones, así como la lógica de negocio asociada. Estas entidades son independientes de la infraestructura y la implementación, lo que permite centrarse en las reglas y restricciones del negocio.
+* **Dominio**: Incluye entidades y lógica de negocio, centrando el diseño en las reglas y procedimientos del negocio sin
+  depender de la infraestructura.
+* **Aplicación**: Gestiona los casos de uso y coordina la comunicación entre los puertos de entrada (interfaces para
+  acciones externas) y de salida (interfaces para acciones internas hacia servicios o bases de datos).
+* **Infraestructura**: Implementa los adaptadores y puertos de salida, configurando y gestionando la interacción con
+  servicios externos y la infraestructura de soporte.
 
-Aplicación: Esta capa contiene los casos de uso, que representan las acciones o funcionalidades que la aplicación puede realizar. Los casos de uso coordinan la comunicación entre los puertos de entrada (interfaces que representan las acciones que se pueden realizar desde el exterior) y los puertos de salida (interfaces que representan las acciones que la aplicación puede realizar hacia el exterior, como interactuar con bases de datos o servicios externos).
+## Principios SOLID en la Arquitectura Hexagonal
 
-Infraestructura: Esta capa contiene los adaptadores y la implementación de los puertos de salida, así como la configuración y la interacción con servicios externos. Los adaptadores son responsables de convertir las solicitudes externas en llamadas a los casos de uso y de convertir las respuestas de los casos de uso en respuestas comprensibles para los sistemas externos.
+* **Principio de Responsabilidad Única**: Cada capa tiene una única responsabilidad, lo que simplifica el mantenimiento
+  y la evolución del código.
+* **Principio Abierto/Cerrado**: Facilita la extensión de funcionalidades sin modificar el código existente.
+* **Principio de Sustitución de Liskov**: Permite la intercambiabilidad de adaptadores e implementaciones sin alterar el
+  comportamiento del sistema.
+* **Principio de Segregación de Interfaces**: Define interfaces específicas para cada funcionalidad, mejorando la
+  claridad y la implementación de adaptadores.
+* **Principio de Inversión de Dependencias**: Utiliza la inyección de dependencias para desacoplar las capas de dominio
+  y aplicación de las implementaciones concretas.
 
-La arquitectura hexagonal se adhiere a los principios SOLID:
+## API Endpoints
 
-**Single Responsibility Principle (SRP):** Cada capa tiene una responsabilidad única y bien definida, lo que evita la mezcla de responsabilidades y facilita el mantenimiento del código.
+La aplicación expone las siguientes rutas de la API para la gestión de tareas:
 
-**Open/Closed Principle (OCP):** Las entidades y los casos de uso están abiertos a la extensión pero cerrados a la modificación. Si se necesita agregar una nueva funcionalidad, se puede hacer extendiendo los casos de uso o creando nuevos adaptadores sin modificar el código existente.
+### Crear una tarea
 
-**Liskov Substitution Principle (LSP):** Los adaptadores y las implementaciones de los puertos deben ser sustituibles sin afectar el comportamiento del sistema, lo que permite cambiar fácilmente entre diferentes implementaciones de infraestructura o servicios externos.
-
-**Interface Segregation Principle (ISP):** Los puertos de entrada y salida definen interfaces pequeñas y específicas para cada funcionalidad, lo que facilita la implementación de adaptadores y evita depender de interfaces innecesariamente grandes.
-
-**Dependency Inversion Principle (DIP):** Las dependencias entre las capas se invierten mediante la inyección de dependencias, lo que permite a las capas de dominio y aplicación depender de abstracciones en lugar de implementaciones concretas.
-
-## Rutas de la API
-
-A continuación se enumeran las rutas de la API con sus métodos HTTP correspondientes y ejemplos de entrada:
-
-1. Crear una tarea
-   Método: POST
-   Ruta: /api/tasks
-   Input: JSON con la información de la tarea (title, description y completed)
+Método: POST
+Ruta: /api/tasks
+Input: JSON con la información de la tarea (title, description y completed)
 
 ```
 {
@@ -41,19 +47,23 @@ A continuación se enumeran las rutas de la API con sus métodos HTTP correspond
 }
 ```
 
-2. Obtener una tarea por ID
-   Método: GET
-   Ruta: /api/tasks/{taskId}
-   Input: taskId en la ruta (reemplazar {taskId} con el ID de la tarea que deseas obtener)
+### Obtener una tarea por ID
 
-3. Obtener todas las tareas
-   Método: GET
-   Ruta: /api/tasks
+Método: GET
+Ruta: /api/tasks/{taskId}
+Input: taskId en la ruta (reemplazar {taskId} con el ID de la tarea que deseas obtener)
 
-4. Actualizar una tarea
-   Método: PUT
-   Ruta: /api/tasks/{taskId}
-   Input: taskId en la ruta (reemplazar {taskId} con el ID de la tarea que deseas actualizar) y JSON con la información actualizada de la tarea (title, description y completed)
+### Obtener todas las tareas
+
+Método: GET
+Ruta: /api/tasks
+
+### Actualizar una tarea
+
+Método: PUT
+Ruta: /api/tasks/{taskId}
+Input: taskId en la ruta (reemplazar {taskId} con el ID de la tarea que deseas actualizar) y JSON con la información
+actualizada de la tarea (title, description y completed)
 
 ```
    {
@@ -63,14 +73,18 @@ A continuación se enumeran las rutas de la API con sus métodos HTTP correspond
    }
 ```
 
-5. Eliminar una tarea por ID
-   Método: DELETE
-   Ruta: /api/tasks/{taskId}
-   Input: taskId en la ruta (reemplazar {taskId} con el ID de la tarea que deseas eliminar)
+### Eliminar una tarea por ID
 
-6. Obtener información adicional de una tarea
-   Método: GET
-   Ruta: /api/tasks/{taskId}/additional-info
-   Input: taskId en la ruta (reemplazar {taskId} con el ID de la tarea para la que deseas obtener información adicional)
-   Pruebas
-   Puedes usar herramientas como Postman o curl para probar estas rutas. Asegúrate de que la aplicación esté en ejecución antes de realizar las pruebas.
+Método: DELETE
+Ruta: /api/tasks/{taskId}
+Input: taskId en la ruta (reemplazar {taskId} con el ID de la tarea que deseas eliminar)
+
+### Obtener información adicional de una tarea
+
+Método: GET
+Ruta: /api/tasks/{taskId}/additional-info
+Input: taskId en la ruta (reemplazar {taskId} con el ID de la tarea para la que deseas obtener información adicional)
+Pruebas
+
+Puedes usar herramientas como Postman o curl para probar estas rutas. Asegúrate de que la aplicación esté en ejecución
+antes de realizar las pruebas.
