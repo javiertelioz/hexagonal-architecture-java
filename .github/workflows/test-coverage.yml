@@ -23,7 +23,7 @@ jobs:
           java-version: 21
 
       - name: Install dependencies
-        run: mvn install -DskipTests=tr ue -Dmaven.javadoc.skip=true -B -V
+        run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
       - name: Run tests and collect coverage
         run: mvn -B test -Ptest -Dspring.profiles.active=test
