@@ -1,5 +1,7 @@
 # Arquitectura hexagonal template Java
 
+[![codecov](https://codecov.io/gh/javiertelioz/hexagonal-architecture-java/graph/badge.svg?token=VA3OL8MXQ9)](https://codecov.io/gh/javiertelioz/hexagonal-architecture-java)
+
 Este proyecto es una aplicación de gestión de tareas que implementa la arquitectura hexagonal, también conocida como
 Ports and Adapters. Diseñada para demostrar cómo esta arquitectura facilita la separación de responsabilidades, la
 aplicación permite realizar operaciones básicas como crear, leer, actualizar y eliminar tareas, además de interactuar
