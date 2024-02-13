@@ -225,7 +225,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <profiles>
-                        <profile>development</profile>
+                        <profile>test</profile>
                     </profiles>
                 </configuration>
                 <executions>
