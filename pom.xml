@@ -231,12 +231,14 @@
                 <executions>
                     <execution>
                         <id>pre-integration-test</id>
+                        <phase>none</phase>
                         <goals>
                             <goal>start</goal>
                         </goals>
                     </execution>
                     <execution>
                         <id>post-integration-test</id>
+                        <phase>none</phase>
                         <goals>
                             <goal>stop</goal>
                         </goals>
