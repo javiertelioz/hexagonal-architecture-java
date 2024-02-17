@@ -1,5 +1,8 @@
 package com.inicions.tasks.infrastructure.controllers;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import jakarta.validation.Valid;
 
@@ -16,14 +19,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.inicions.tasks.application.services.TaskService;
 import com.inicions.tasks.domain.model.AdditionalTaskInfo;
 import com.inicions.tasks.domain.model.Task;
-
 
 @RestController
 @RequestMapping("/api/v1/tasks")
@@ -50,7 +48,7 @@ public class TaskController {
     @SecurityRequirement(name = "Bearer Authentication")
     @Operation(summary = "Create a new task",
             description = "Create a task object. The response is task object with id, title, description and published status.",
-            tags = { "Task"})
+            tags = {"Task"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Task created successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid input"),
@@ -71,7 +69,7 @@ public class TaskController {
     @Operation(
             summary = "Get a task by its id",
             description = "Get a task object by specifying its id. The response is task object with id, title, description and published status.",
-            tags = { "Task" }
+            tags = {"Task"}
     )
     @SecurityRequirement(name = "Bearer Authentication")
     @ApiResponses(value = {
@@ -96,8 +94,9 @@ public class TaskController {
     @Operation(
             summary = "Get all tasks",
             description = "Get all tasks. The response is list of task object with id, title, description and published status.",
-            tags = { "Task" }
+            tags = {"Task"}
     )
+    @SecurityRequirement(name = "Bearer Authentication")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Tasks retrieved successfully"),
             @ApiResponse(responseCode = "404", description = "Tasks not found")
@@ -112,11 +111,13 @@ public class TaskController {
     @Operation(
             summary = "Update a task by its id",
             description = "Update the details of a task specified by its id",
-            tags = { "Task" }
+            tags = {"Task"}
     )
+    @SecurityRequirement(name = "Bearer Authentication")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Task updated successfully"),
-            @ApiResponse(responseCode = "404", description = "Task not found") })
+            @ApiResponse(responseCode = "404", description = "Task not found")})
+    @PreAuthorize("hasRole('USER')")
     @PutMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task updatedTask) {
         return taskService.updateTask(id, updatedTask)
@@ -127,12 +128,14 @@ public class TaskController {
     @Operation(
             summary = "Delete a task by its id",
             description = "Delete a task specified by its id",
-            tags = { "Task" }
+            tags = {"Task"}
     )
+    @SecurityRequirement(name = "Bearer Authentication")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Task deleted successfully"),
-            @ApiResponse(responseCode = "404", description = "Task not found") }
+            @ApiResponse(responseCode = "404", description = "Task not found")}
     )
+    @PreAuthorize("hasRole('USER')")
     @DeleteMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<Void> deleteTaskById(@PathVariable Long id) {
         if (taskService.deleteTask(id)) {
@@ -145,11 +148,12 @@ public class TaskController {
     @Operation(
             summary = "Get additional info for a task by its id",
             description = "Get additional info for a task specified by its id",
-            tags = { "Task" }
+            tags = {"Task"}
     )
+    @SecurityRequirement(name = "Bearer Authentication")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Task info retrieved successfully"),
-            @ApiResponse(responseCode = "404", description = "Task not found") }
+            @ApiResponse(responseCode = "404", description = "Task not found")}
     )
     @GetMapping(value = "/{id}/additional-info", produces = "application/json")
     public ResponseEntity<AdditionalTaskInfo> getAdditionalTaskInfo(@PathVariable Long id) {

@@ -27,12 +27,13 @@ public class UserController {
 
     @Operation(summary = "Create a new user",
             description = "Create a user object. The response is user object with id, username, lastname, email and status.",
-            tags = { "User"}
+            tags = {"User"}
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid input"),
-            @ApiResponse(responseCode = "500", description = "Internal error")})
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")}
+    )
     @PostMapping(
             consumes = "application/json",
             produces = "application/json"

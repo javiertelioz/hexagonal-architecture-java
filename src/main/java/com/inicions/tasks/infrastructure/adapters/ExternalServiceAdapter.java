@@ -11,9 +11,10 @@ public class ExternalServiceAdapter implements ExternalServicePort {
 
     private final RestTemplate restTemplate;
 
-    public ExternalServiceAdapter() {
-        restTemplate = new RestTemplate();
+    public ExternalServiceAdapter(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
     }
+
 
     @Override
     public AdditionalTaskInfo getAdditionalTaskInfo(Long taskId) {
@@ -36,7 +37,7 @@ public class ExternalServiceAdapter implements ExternalServicePort {
         return new AdditionalTaskInfo(user.getId(), user.getName(), user.getEmail());
     }
 
-    private static class JsonPlaceholderTodo {
+    static class JsonPlaceholderTodo {
         private Long id;
         private Long userId;
 
@@ -57,7 +58,7 @@ public class ExternalServiceAdapter implements ExternalServicePort {
         }
     }
 
-    private static class JsonPlaceholderUser {
+    static class JsonPlaceholderUser {
         private Long id;
         private String name;
         private String email;

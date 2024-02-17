@@ -250,7 +250,9 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <configuration>
                     <excludes>
-                        <exclude>io/truongbn/github/jacoco/JacocoApplication.class</exclude>
+                        <exclude>com/inicions/tasks/TasksApplication.class</exclude>
+                        <exclude>com/inicions/tasks/infrastructure/security/JwtAuthorizationFilter.class</exclude>
+                        <exclude>com/inicions/tasks/infrastructure/security/JwtAuthenticationFilter.class</exclude>
                     </excludes>
                 </configuration>
                 <executions>

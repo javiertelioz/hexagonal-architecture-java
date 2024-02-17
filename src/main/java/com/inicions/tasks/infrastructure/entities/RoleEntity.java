@@ -1,7 +1,7 @@
 package com.inicions.tasks.infrastructure.entities;
 
 import com.inicions.tasks.domain.model.Role;
-import com.inicions.tasks.domain.model.User;
+
 import jakarta.persistence.*;
 
 @Entity
