@@ -17,6 +17,7 @@ import com.inicions.tasks.infrastructure.adapters.ExternalServiceAdapter;
 
 import com.inicions.tasks.infrastructure.repositories.task.JpaTaskRepositoryAdapter;
 import com.inicions.tasks.infrastructure.repositories.user.JpaUserRepositoryAdapter;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class ApplicationConfig {
@@ -43,7 +44,7 @@ public class ApplicationConfig {
         return new UserService(
                 new CreateUserUseCaseImpl(userRepositoryPort),
                 new GetUserByEmailUseCaseImpl(userRepositoryPort)
-            );
+        );
     }
 
     @Bean
@@ -57,8 +58,13 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public ExternalServicePort externalServicePort() {
-        return new ExternalServiceAdapter();
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
+    @Bean
+    public ExternalServicePort externalServicePort(RestTemplate restTemplate) {
+        return new ExternalServiceAdapter(restTemplate);
     }
 
 
