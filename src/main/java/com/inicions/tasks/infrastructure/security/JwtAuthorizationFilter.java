@@ -19,7 +19,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-@Component
+//@Component
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     private final JwtUtils jwtUtils;
@@ -36,10 +36,6 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             @NonNull HttpServletRequest request,
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain) throws ServletException, IOException {
-        /*if ("/api/v1/tasks".equals(request.getRequestURI())) {
-            filterChain.doFilter(request, response);
-            return;
-        }*/
 
         try {
             String tokenHeader = request.getHeader("Authorization");

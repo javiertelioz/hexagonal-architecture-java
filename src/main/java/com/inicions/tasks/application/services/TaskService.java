@@ -12,7 +12,12 @@ import com.inicions.tasks.domain.ports.in.UpdateTaskUseCase;
 import java.util.List;
 import java.util.Optional;
 
-public class TaskService implements CreateTaskUseCase, RetrieveTaskUseCase, UpdateTaskUseCase, DeleteTaskUseCase, GetAdditionalTaskInfoUseCase {
+public class TaskService implements
+        CreateTaskUseCase,
+        RetrieveTaskUseCase,
+        UpdateTaskUseCase,
+        DeleteTaskUseCase,
+        GetAdditionalTaskInfoUseCase {
 
     private final CreateTaskUseCase createTaskUseCase;
     private final RetrieveTaskUseCase retrieveTaskUseCase;

@@ -1,10 +1,9 @@
 package com.inicions.tasks.infrastructure.controllers;
 
 import com.inicions.tasks.TasksApplication;
-import com.inicions.tasks.application.services.TaskService;
-import com.inicions.tasks.domain.model.Task;
 
 import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;

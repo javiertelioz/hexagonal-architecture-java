@@ -1,5 +1,7 @@
 package com.inicions.tasks.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 
 public class Task {
@@ -7,7 +9,7 @@ public class Task {
     private Long id;
     private String title;
     private String description;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "UTC")
     private LocalDateTime creationDate;
     private boolean completed;
 
