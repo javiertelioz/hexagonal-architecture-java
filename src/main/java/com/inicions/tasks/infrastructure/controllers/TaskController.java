@@ -140,9 +140,9 @@ public class TaskController {
     public ResponseEntity<Void> deleteTaskById(@PathVariable Long id) {
         if (taskService.deleteTask(id)) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @Operation(

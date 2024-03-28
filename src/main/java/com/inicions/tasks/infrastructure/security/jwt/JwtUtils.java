@@ -23,7 +23,7 @@ public class JwtUtils {
     private String timeExpiration;
 
     // Generar token de acceso
-    public String generateAccessToken(String username){
+    public String generateAccessToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
@@ -33,33 +33,33 @@ public class JwtUtils {
     }
 
     // Validar el token de acceso
-    public boolean isTokenValid(String token){
-        try{
+    public boolean isTokenValid(String token) {
+        try {
             Jwts.parserBuilder()
                     .setSigningKey(getSignatureKey())
                     .build()
                     .parseClaimsJws(token)
                     .getBody();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Invalid Token, error: ".concat(e.getMessage()));
             return false;
         }
     }
 
     // Obtener el username del token
-    public String getUsernameFromToken(String token){
+    public String getUsernameFromToken(String token) {
         return getClaim(token, Claims::getSubject);
     }
 
     // Obtener un solo claim
-    public <T> T getClaim(String token, Function<Claims, T> claimsTFunction){
+    public <T> T getClaim(String token, Function<Claims, T> claimsTFunction) {
         Claims claims = extractAllClaims(token);
         return claimsTFunction.apply(claims);
     }
 
     // Obtener todos los claims del token
-    public Claims extractAllClaims(String token){
+    public Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSignatureKey())
                 .build()
@@ -68,7 +68,7 @@ public class JwtUtils {
     }
 
     // Obtener firma del token
-    public Key getSignatureKey(){
+    public Key getSignatureKey() {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }

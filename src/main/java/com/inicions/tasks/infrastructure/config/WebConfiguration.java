@@ -8,6 +8,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfiguration implements WebMvcConfigurer {
     @Override
     public void configurePathMatch(PathMatchConfigurer configure) {
-        configure.setUseTrailingSlashMatch(true);
+        configure.setUseTrailingSlashMatch(false);
     }
 }
