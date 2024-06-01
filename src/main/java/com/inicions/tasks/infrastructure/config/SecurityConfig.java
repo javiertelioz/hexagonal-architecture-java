@@ -14,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.inicions.tasks.infrastructure.security.JwtAuthenticationFilter;
@@ -22,8 +21,8 @@ import com.inicions.tasks.infrastructure.security.JwtAuthorizationFilter;
 import com.inicions.tasks.infrastructure.security.jwt.JwtUtils;
 import com.inicions.tasks.infrastructure.services.UserDetailsServiceImpl;
 
-@Configuration
-@EnableMethodSecurity()
+// @Configuration
+//@EnableMethodSecurity()
 public class SecurityConfig {
 
     private final JwtUtils jwtUtils;
@@ -89,7 +88,7 @@ public class SecurityConfig {
 //    }
 
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -98,6 +97,7 @@ public class SecurityConfig {
         return httpSecurity.getSharedObject(AuthenticationManagerBuilder.class)
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder)
-                .and().build();
+                .and()
+                .build();
     }
 }
